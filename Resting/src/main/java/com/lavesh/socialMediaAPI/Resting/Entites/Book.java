@@ -2,6 +2,7 @@ package com.lavesh.socialMediaAPI.Resting.Entites;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -15,7 +16,6 @@ import java.time.*;
 public class Book{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookId;
     @Column
     private String bookName;
@@ -23,12 +23,12 @@ public class Book{
     @Column
     private LocalDate bookDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "auth_Id")
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "auth_id",referencedColumnName = "authId")
     private Author author;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "revBook")
-    private List<Reviews> reviews;
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "revBook")
+//    private List<Reviews> reviews;
 
 //    @ManyToMany(mappedBy = "pubBook")
 //    @JoinColumn(name = "publisher_id")
@@ -60,13 +60,14 @@ public class Book{
         this.author = author;
     }
 
-    public List<Reviews> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Reviews> reviews) {
-        this.reviews = reviews;
-    }
+//
+//    public List<Reviews> getReviews() {
+//        return reviews;
+//    }
+//
+//    public void setReviews(List<Reviews> reviews) {
+//        this.reviews = reviews;
+//    }
 
     public LocalDate getBookDate() {
         return bookDate;

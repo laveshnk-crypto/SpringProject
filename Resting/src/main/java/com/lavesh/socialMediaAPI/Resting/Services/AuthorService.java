@@ -22,7 +22,7 @@ public class AuthorService {
 
     public List<Author> getAuth()
     {
-      return authorRepo.findAll();
+        return authorRepo.findAll();
     }
 
     // for the POST method
