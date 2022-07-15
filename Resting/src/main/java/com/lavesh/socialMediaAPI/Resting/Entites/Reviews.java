@@ -12,9 +12,7 @@ public class Reviews {
     @Column
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_id")
-    private Book revBook;
+
 
 
     public long getRev_id() {
@@ -41,11 +39,5 @@ public class Reviews {
         this.description = description;
     }
 
-    public Book getRevBook() {
-        return revBook;
-    }
 
-    public void setRevBook(Book revBook) {
-        this.revBook = revBook;
-    }
 }
